@@ -1,23 +1,666 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+
+ <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "서대문구 인터넷 가입 비교 센터",
+      "url": "https://yourdomain.com",
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "서대문구",
+        "description": "홍제동, 연희동, 신촌동, 북가좌동, 남가좌동, 충현동, 천연동, 북아현동, 홍은동, 냉천동, 영천동, 현저동, 합동, 미근동, 대신동, 창천동, 연희동"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "서대문구 인터넷 가입 전문 업체",
+        "url": "https://yourdomain.com",
+        "description": "서대문구 지역 전문 인터넷 가입 및 설치 비교 서비스 제공"
+      },
+      "description": "서대문구 지역 맞춤형 인터넷 가입 상품을 비교하고 현금 사은품 혜택을 제공합니다. 2026년 최신 통신사별 요금 및 프로모션을 분석하여 고객에게 가장 합리적인 가입 조건을 찾아드립니다.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "서대문구 인터넷 상품 종류",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "초고속 인터넷 (100Mbps)"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "22000",
+              "priceCurrency": "KRW",
+              "description": "기본적인 웹 서핑, OTT 시청, 간단한 온라인 게임에 적합한 상품"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "기가 라이트 인터넷 (500Mbps)"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "33000",
+              "priceCurrency": "KRW",
+              "description": "가족 단위 사용, 고화질 스트리밍, 대용량 파일 다운로드에 적합한 인기 상품"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "기가 인터넷 (1Gbps)"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "38500",
+              "priceCurrency": "KRW",
+              "description": "초고속 환경이 필요한 전문 작업, 게이밍, 대규모 사무실에 최적화된 상품"
+            }
+          }
+        ]
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+      background-color: #f7f9fc; /* 부드러운 배경색 */
+      color: #333;
+      word-break: keep-all; /* 한글 단어 단위 줄바꿈 */
+      font-weight: 300;
+      scroll-behavior: smooth;
+    }
+    header {
+      background-color: #2c3e50; /* 진한 남색 */
+      color: white;
+      padding: 3rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 152, 219, 0.7));
+      z-index: 1;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin: 0.5rem 0 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 2;
+    }
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 2;
+    }
+    nav {
+      position: relative;
+      z-index: 2;
+      margin-top: 1.5rem;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 0;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease, transform 0.3s ease;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      position: relative;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    nav a:hover {
+      color: #ffd700; /* 황금색 */
+      transform: translateY(-3px);
+    }
+    main {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+      background-color: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+      border-radius: 15px;
+    }
+    h1, h2 {
+      color: #2c3e50; /* 진한 남색 */
+      font-weight: 700;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-bottom: 3px solid #e0eaf1;
+    }
+    h2 {
+      font-size: 2.2rem;
+    }
+    h3 {
+      color: #3498db; /* 밝은 파란색 */
+      font-size: 1.6rem;
+      margin-top: 2rem;
+      font-weight: 500;
+    }
+    p {
+      text-align: justify;
+      margin-bottom: 1.5rem;
+    }
+    .content-section {
+      padding: 2rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 1.2rem;
+      border: 1px solid #e0e0e0;
+      text-align: center;
+    }
+    th {
+      background-color: #34495e; /* 어두운 청회색 */
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    tr:nth-child(even) {
+      background-color: #fcfcfc;
+    }
+    tr:hover {
+      background-color: #f0f8ff;
+    }
+    dl dt {
+      font-weight: 700;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      color: #2980b9; /* 청록색 */
+      background-color: #eaf3ff;
+      padding: 1rem 1.5rem;
+      border-left: 5px solid #2980b9;
+      transition: background-color 0.3s ease;
+      border-radius: 4px;
+      font-size: 1.1rem;
+    }
+    dl dt:hover {
+      background-color: #dbeaff;
+    }
+    dl dd {
+      margin: 0.5rem 0 1.5rem 1rem;
+      padding: 1rem 1.5rem;
+      border-left: 2px dashed #ccc;
+      display: none;
+      background-color: #ffffff;
+      line-height: 1.7;
+    }
+    dl dt.active + dd {
+      display: block;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #e74c3c; /* 붉은색 */
+      color: white;
+      font-weight: 700;
+      padding: 1.2rem 3rem;
+      border-radius: 50px;
+      text-decoration: none;
+      margin: 2rem auto;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      text-align: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .cta-button:hover {
+      background-color: #c0392b;
+      transform: translateY(-3px);
+    }
+    .keyword-tags {
+      margin: 2.5rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .keyword-tags a {
+      background-color: #ecf0f1; /* 밝은 회색 */
+      color: #2c3e50;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      border: 1px solid #bdc3c7;
+    }
+    .keyword-tags a:hover {
+      background-color: #bdc3c7;
+      transform: scale(1.05);
+    }
+    .graph-container {
+      margin: 3rem 0;
+      padding: 2rem;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    }
+    .graph-container h3 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .bar-chart {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      height: 250px;
+      margin-top: 2rem;
+      border-bottom: 2px solid #ccc;
+    }
+    .bar {
+      width: 15%;
+      background-color: #3498db;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      transition: height 0.5s ease;
+      position: relative;
+    }
+    .bar span {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .bar p {
+      position: absolute;
+      bottom: -30px;
+      width: 100%;
+      font-size: 0.9rem;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .local-info {
+      background-color: #ecf0f1;
+      border-radius: 10px;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .form-section {
+      padding: 3rem 0;
+      background-color: #eaf3ff;
+      border-radius: 10px;
+      margin: 3rem 0;
+      text-align: center;
+    }
+    .form-section form {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .form-section label {
+      font-weight: 500;
+      color: #2c3e50;
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+    }
+    .form-section input[type="text"], .form-section input[type="email"], .form-section input[type="tel"], .form-section select {
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .form-section button {
+      background-color: #2ecc71; /* 초록색 */
+      color: white;
+      padding: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 1rem;
+    }
+    .form-section button:hover {
+      background-color: #27ae60;
+    }
+    .external-link {
+      display: inline-block;
+      color: #2980b9;
+      font-weight: 500;
+      margin-top: 1rem;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 3rem;
+      font-size: 0.9rem;
+      color: #777;
+      background-color: #e0eaf1;
+      margin-top: 3rem;
+      border-top: 1px solid #d0dbe4;
+    }
+    @media (max-width: 768px) {
+      main {
+        padding: 0 1rem;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      nav ul {
+        gap: 1rem;
+      }
+      nav a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      h3 {
+        font-size: 1.4rem;
+      }
+      table, th, td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      th {
+        display: none;
+      }
+      td:first-child {
+        font-weight: bold;
+        background-color: #f0f8ff;
+      }
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+      .keyword-tags {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>서대문구 인터넷 가입, 현명한 선택을 위한 완벽 가이드</h1>
+    <p>서대문구 전 지역(홍제동, 연희동, 신촌, 북가좌동) 초고속 인터넷 설치 비용 비교 및 2026년 최신 현금지원 혜택 안내</p>
+    <nav aria-label="메인 메뉴">
+      <ul>
+        <li><a href="#요금제비교">요금제 비교</a></li>
+        <li><a href="#현금사은품">현금 사은품</a></li>
+        <li><a href="#설치절차">설치 절차</a></li>
+        <li><a href="#지역정보">서대문구 지역 정보</a></li>
+        <li><a href="#faq">자주 묻는 질문</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  </header>
+
+  <main>
+    <section id="introduction" class="content-section">
+      <h2>서대문구 인터넷 가입, 왜 꼼꼼하게 비교해야 할까요?</h2>
+      <p>서대문구는 신촌, 이대(이화여대), 홍대와 인접한 번화가부터 홍제동, 연희동과 같은 주거 밀집 지역까지 다양한 특성을 가진 지역입니다. 특히 신규 아파트 단지(북가좌동 DMC 파크뷰자이, 남가좌동 DMC 에코자이)와 오래된 다세대 주택이 공존하는 지역 특성상, 거주 환경에 따라 **서대문구 인터넷 설치** 가능 여부와 속도가 달라질 수 있습니다. 2026년 현재, 단순히 통신사만 보고 가입했다가는 예상치 못한 **인터넷 비용** 초과나 낮은 품질로 인해 손해를 볼 수 있습니다. **저희 서대문구 인터넷 가입 비교 센터는 KT, SKT, LG U+ 등 모든 통신사의 상품을 투명하게 비교하여, 고객님의 주거 환경과 사용 목적에 딱 맞는 최적의 **인터넷 가입** 조건을 찾아드립니다.**</p>
+
+      <div class="keyword-tags" aria-label="연관 검색 키워드">
+        <a href="#요금제비교">서대문구 인터넷 요금</a>
+        <a href="#현금사은품">인터넷 사은품</a>
+        <a href="#요금제비교">인터넷 저렴한곳</a>
+        <a href="#요금제비교">기가 인터넷 비용</a>
+        <a href="#지역정보">홍제동 인터넷 설치</a>
+        <a href="#지역정보">연희동 인터넷 가입</a>
+        <a href="#지역정보">남가좌동 인터넷 추천</a>
+        <a href="#요금제비교">KT 인터넷 할인</a>
+        <a href="#요금제비교">SKT 인터넷 가입 혜택</a>
+        <a href="#요금제비교">LG U+ 인터넷 비교</a>
+        <a href="#설치절차">인터넷 신규 가입</a>
+        <a href="#현금사은품">인터넷 현금지원</a>
+        <a href="#faq">인터넷 약정 기간</a>
+      </div>
+    </section>
+
+    <section id="요금제비교" class="content-section">
+      <h2>2026년 서대문구 통신사별 인터넷 요금제 및 상품 비교</h2>
+      <p>인터넷 요금제는 100Mbps(초고속 인터넷), 500Mbps(기가 라이트), 1Gbps(기가 인터넷) 세 가지 속도 상품이 가장 일반적입니다. **서대문구 인터넷** 가입 시, 본인의 사용 환경을 고려하지 않고 무조건 빠른 속도를 선택할 필요는 없습니다. 특히 **원룸 이사**를 하거나 1인 가구인 경우 100Mbps로도 충분할 수 있습니다. 2026년 통신사별 **인터넷 가격** 및 **현금지원**을 비교해 보세요. 아래 표는 3년 약정 기준 월 **예상 금액**입니다.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>상품 속도</th>
+            <th>KT (기가 인터넷)</th>
+            <th>SKT (Btv 결합)</th>
+            <th>LG U+ (IPTV 결합)</th>
+            <th>특징 및 추천 사용자</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>100Mbps (광랜)</strong></td>
+            <td>22,000원 ~</td>
+            <td>22,000원 ~</td>
+            <td>22,000원 ~</td>
+            <td>가성비가 중요한 1인 가구, 웹서핑 위주 사용자에게 적합한 **저렴한곳** 상품입니다.</td>
+          </tr>
+          <tr>
+            <td><strong>500Mbps (기가 라이트)</strong></td>
+            <td>33,000원 ~</td>
+            <td>33,000원 ~</td>
+            <td>33,000원 ~</td>
+            <td>가족 단위, 스트리밍, 대용량 파일 다운로드가 잦은 사용자에게 **추천**되는 **가성비** 상품입니다.</td>
+          </tr>
+          <tr>
+            <td><strong>1Gbps (기가 인터넷)</strong></td>
+            <td>38,500원 ~</td>
+            <td>38,500원 ~</td>
+            <td>38,500원 ~</td>
+            <td>AI 관련 작업, 실시간 스트리밍, 고사양 온라인 게임(LOL, 배그 등), 다수의 기기 연결에 필수적인 **전문** 상품입니다.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>참고:</strong> 위 **인터넷 비용**은 통신사별 프로모션이나 TV, 모바일 결합 상품에 따라 달라질 수 있습니다. 특히 <strong>서대문구 원룸</strong>이나 <strong>오피스텔 인터넷</strong>의 경우 건물 내 인프라에 따라 설치가 불가능하거나 속도가 제한될 수 있으므로, 정확한 **인터넷 견적**을 위해 반드시 방문 견적(또는 전화 상담 시 건물 주소 확인)을 받아야 합니다.</p>
+    </section>
+
+    <section id="현금사은품" class="content-section">
+      <h2>인터넷 가입의 핵심! 현금 사은품과 혜택, 2026년 분석</h2>
+      <p>**서대문구 인터넷 가입**을 앞둔 고객들이 가장 중요하게 생각하는 부분 중 하나는 **현금지원**과 **사은품**입니다. 통신사 본사(KT, SKT, LG U+)에서 제공하는 **사은품**은 규격화되어 있지만, 대리점을 통한 **신규 가입** 시 추가적인 **현금지원**을 받을 수 있습니다. 저희는 **네이버**나 **구글** 검색 시 나오는 수많은 **업체**들 중에서도 고객에게 가장 많은 **현금지원**을 약속하는 **전문** **업체**만을 선별하여 제휴하고 있습니다. 특히 2026년에는 통신사 간 경쟁 심화로 **현금 사은품** 규모가 역대 최고 수준으로 상승하고 있으며, **인터넷 가입 혜택**으로 상품권뿐만 아니라 **현금지원금**이 지급되는 경우가 많습니다.</p>
+      <p><strong>[주의: 과도한 현금지원금은 오히려 함정일 수 있습니다.]</strong> 일부 **업체**는 터무니없이 높은 **지원금**을 제시하며 고객을 유치한 후, 약속된 **현금지원금**을 지급하지 않거나(먹튀), 낮은 품질의 서비스를 제공하는 경우가 있습니다. 따라서 **인터넷 가입** 시에는 **내돈내산** **후기**를 꼼꼼히 확인하고, **한국소비자원** 등에 등록된 정식 **업체**인지 확인해야 합니다. 저희 **서대문구 인터넷 가입 비교 센터**는 믿을 수 있는 **업체**와만 제휴하고 있어, **현금지원** **이벤트** 참여 시 안전하게 **상품권** 및 **지원금**을 받으실 수 있습니다.</p>
+
+      <h3>2026년 인터넷 가입 현금지원 규모 트렌드 (가상 그래프)</h3>
+      <div class="graph-container">
+        <h3>서대문구 인터넷 가입 현금지원 규모 추이 (2024년 대비 2026년)</h3>
+        <p>※ 3년 약정, 기가 라이트+IPTV 가입 기준 평균 현금 사은품 변화</p>
+        <div class="bar-chart">
+          <div class="bar" style="height: 60%; background-color: #f39c12;">
+            <span>40만원대</span>
+            <p>2024년 평균</p>
+          </div>
+          <div class="bar" style="height: 85%; background-color: #e67e22;">
+            <span>50만원대</span>
+            <p>2025년 평균</p>
+          </div>
+          <div class="bar" style="height: 100%; background-color: #2ecc71;">
+            <span>60만원대 이상</span>
+            <p>2026년 예상</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="설치절차" class="content-section">
+      <h2>서대문구 인터넷 신규 가입 및 설치 절차 안내</h2>
+      <p>**서대문구 인터넷 설치**는 다음과 같은 체계적인 절차를 통해 이루어집니다. 복잡하게 생각할 필요 없이 단계별로 진행하시면 됩니다.</p>
+
+      <h3>1. 상담 및 상품 선택: 통신사 및 요금제 결정</h3>
+      <p>가장 먼저 고객님의 **서대문구** 주소지(<strong>홍제동, 연희동, 신촌</strong> 등)를 기준으로 **인터넷 설치** 가능 여부를 확인합니다. 특히 **원룸**이나 **오피스텔** 거주자는 건물 유형에 따라 특정 통신사의 **인터넷 가입**만 가능할 수 있으므로, 정확한 주소 확인이 필수입니다. 이후 사용 패턴에 따라 100Mbps, 500Mbps, 1Gbps 중 적절한 속도를 선택하고, TV 및 전화 결합 여부를 결정하여 **인터넷 견적**을 확정합니다. 저희 상담사들은 **AI** 챗봇이나 **ChatGPT**보다 더 정확하고 신속하게 고객 맞춤형 상품을 **추천**해 드립니다.</p>
+
+      <h3>2. 방문 일정 조율 및 계약 체결</h3>
+      <p>상담을 통해 결정된 상품과 **현금지원** 혜택을 기반으로 **신규 가입** 계약을 체결합니다. 이 과정에서 **약정 기간(보통 3년)**, **위약금**, **월 예상 금액** 등을 꼼꼼히 확인합니다. 일부 **업체**는 구두로만 **현금지원금**을 약속하는 경우가 있으니, 반드시 계약서에 명시된 내용을 확인해야 합니다. 이후 고객님의 일정에 맞춰 **서대문구 인터넷 설치** 기사님의 방문 일정을 조율합니다. **이사** 당일에는 이사짐 정리와 함께 인터넷 설치를 진행할 수 있도록 미리 예약하는 것이 좋습니다.</p>
+
+      <h3>3. 설치 당일 작업 및 마무리</h3>
+      <p>약속된 시간에 전문 **인터넷 설치** 기사님이 방문하여 작업을 진행합니다. 기사님은 고객님의 주거 환경을 파악하고 최적의 경로로 케이블을 포설하며, 모뎀 및 공유기(라우터)를 설치합니다. 특히 **서대문구**의 오래된 건물에서는 광케이블 포설이 불가능하여 구리선 기반의 VDSL/ADSL을 사용해야 하는 경우가 발생할 수 있습니다. 이러한 경우 **인터넷 속도**가 제한될 수 있으므로 사전에 확인해야 합니다. 설치 완료 후 **인터넷 속도 측정**을 진행하여 계약된 속도가 나오는지 확인하고, 문제가 없을 시 **가입**이 완료됩니다.</p>
+    </section>
+
+    <section id="지역정보" class="content-section">
+      <h2>서대문구 세부 지역별 인터넷 설치 특이점 분석 (2026년)</h2>
+      <p>**서대문구 인터넷 가입**을 고려할 때, 거주하는 지역의 특성을 이해하는 것이 중요합니다. **서대문구**는 신규 아파트 단지와 노후 주택 단지가 혼재되어 있어 **인터넷 설치** 환경이 극명하게 갈립니다. 이로 인해 같은 통신사의 **인터넷 비용**이라도 건물 환경에 따라 **할인** 폭이나 **사은품** 조건이 달라질 수 있습니다. **저희 서대문구 인터넷 전문 업체는 서대문구 전역의 2026년 최신 설치 환경 데이터를 기반으로 정확한 **인터넷 견적**을 제공합니다.**</p>
+
+      <div class="local-info">
+        <h3>1. 북가좌동, 남가좌동 (신축 아파트 단지)</h3>
+        <p><strong>DMC 파크뷰자이, DMC 에코자이, DMC 래미안e편한세상</strong> 등의 신축 아파트 단지는 건물 내부까지 광케이블이 완벽하게 구축되어 있습니다. 따라서 <strong>기가 인터넷(1Gbps)</strong> 설치가 매우 용이하며, 통신사 3사(KT, SKT, LG U+) 모두 안정적인 품질을 보장합니다. **서대문구 인터넷** 가입 시, **가격**보다는 **사은품**이나 **현금지원** 혜택을 비교하여 **저렴한곳**을 선택하는 것이 유리합니다. 특히 **SKT**와 **LG U+**는 신축 아파트 단지에 공격적인 프로모션을 진행하는 경우가 많습니다.</p>
+
+        <h3>2. 홍제동, 홍은동 (구도심 및 주택 밀집 지역)</h3>
+        <p><strong>홍제동</strong>과 <strong>홍은동</strong>은 오래된 다세대 주택 및 빌라가 많은 지역입니다. 이 지역은 **서대문구 인터넷** 설치 시 광케이블 포설이 어려운 경우가 많아 VDSL(광케이블이 아닌 구리선) 방식으로 설치될 가능성이 높습니다. VDSL은 이론상 최대 100Mbps 속도를 지원하지만, 실제로는 50~70Mbps 수준으로 속도가 제한될 수 있습니다. <strong>서대문구 인터넷</strong> **전문 업체**를 통해 사전에 건물 내 통신 환경을 확인하고, <strong>인터넷 가입</strong>을 진행해야 합니다. **KT**가 구도심 지역에 가장 안정적인 인프라를 구축한 경우가 많아 **추천**되기도 합니다.</p>
+
+        <h3>3. 신촌, 이대(이화여대) 지역 (원룸 및 오피스텔 밀집)</h3>
+        <p><strong>신촌동</strong>과 <strong>창천동</strong>은 대학생 **원룸** 및 **오피스텔**이 밀집된 지역입니다. 이 지역의 **서대문구 인터넷**은 건물 전체가 특정 통신사의 전용망(아파트 단체 계약)으로 묶여있는 경우가 많습니다. 이 경우 다른 통신사로 **신규 가입**이 불가능할 수 있습니다. **인터넷 비용** 절약을 위해 건물 관리사무소에 **인터넷 업체**를 문의하거나, **서대문구 인터넷 가입 비교 센터**를 통해 **인터넷 설치** 가능 여부를 정확하게 확인해야 합니다.</p>
+      </div>
+    </section>
+
+    <section id="faq" class="content-section">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      <dl>
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 서대문구 인터넷 가입 시 현금 사은품은 언제 받을 수 있나요?</strong></dt>
+        <dd>저희 **서대문구 인터넷** 제휴 **업체**들은 **신규 가입** 후 보통 설치 익일 또는 7일 이내에 약속된 **현금지원금**을 지급합니다. 일부 **업체**는 늦장 지급이나 약속 불이행으로 **내돈내산 후기**에 좋지 않은 평을 남기기도 하므로, 저희처럼 **전문 업체**와 계약하는 것이 안전합니다. **현금지원** 시기는 계약서에 명시된 내용에 따라 달라질 수 있습니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 인터넷 약정 기간이 끝나지 않았는데 해지하면 위약금이 발생하나요?</strong></dt>
+        <dd>네, **인터넷 가입** 시 3년 약정을 하는 것이 일반적이며, 약정 기간이 끝나기 전에 해지하면 위약금이 발생합니다. 위약금은 남은 약정 기간과 **상품**에 따라 다르지만, **통신사**의 약관에 따라 산정됩니다. **서대문구 이사** 시 주소지에 **인터넷 설치**가 불가능한 경우(ex. 구도심 주택으로 이사 시 광케이블 설치 불가), 위약금이 면제될 수 있으므로 통신사에 문의해보는 것이 좋습니다.
+        <a href="https://www.ftc.go.kr/policy/policy_02.jsp?type=policy&pageid=255" target="_blank" rel="noopener noreferrer" class="external-link">공정거래위원회 소비자 분쟁해결기준 확인하기</a>
+        </dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. AI, ChatGPT, Gemini 등 기술 발전으로 인터넷 속도가 더 중요해졌나요?</strong></dt>
+        <dd>2026년 현재 **AI** 기술 발전으로 인해 **인터넷 속도**의 중요성은 더욱 강조되고 있습니다. **ChatGPT**나 **Gemini**와 같은 AI 서비스를 이용하거나, 클라우드 기반의 작업을 하는 경우, 대용량 데이터 전송이 필수적입니다. 또한, 실시간 스트리밍 및 화상 회의의 품질을 높이기 위해서는 **기가 인터넷**과 같은 빠른 속도가 필요합니다. **서대문구 인터넷** **신규 가입** 시 **100Mbps**와 **500Mbps**의 **가격 차이**가 크지 않다면 **500Mbps**를 **추천**합니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 서대문구 원룸 인터넷 가입 시 주의사항이 있나요?</strong></dt>
+        <dd>**서대문구 원룸**이나 **오피스텔**은 건물 전체가 특정 통신사의 전용망(아파트 단체 계약)으로 묶여있는 경우가 많습니다. 이 경우, 고객이 원하는 다른 통신사로 **신규 가입**이 불가능할 수 있습니다. **인터넷 가입** 전 반드시 관리사무소나 건물주에게 **인터넷 업체**를 문의하거나, 저희 센터에 문의하여 **설치** 가능 여부를 확인해야 **추가 비용**이나 **이사 당일** 혼란을 막을 수 있습니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. SKT, KT, LG U+ 각 통신사의 장점과 단점은 무엇인가요?</strong></dt>
+        <dd><strong>KT</strong>는 **서대문구**를 비롯해 전국적으로 가장 넓고 안정적인 인프라를 보유하고 있다는 **장점**이 있습니다. 특히 **구도심 주택**이나 **섬 지역** 등 인프라가 취약한 곳에서 강점을 보입니다. **SKT**는 모바일(휴대폰) 결합 **할인** 혜택이 가장 강력하다는 **장점**이 있으며, **LG U+**는 IPTV 채널 수 및 콘텐츠 경쟁력이 뛰어나다는 **장점**이 있습니다. 고객님의 모바일 통신사와 결합하여 **가장 저렴한 곳**을 선택하는 것이 현명합니다. 저희는 **통신사별 장단점**을 상세히 분석하여 **추천**해 드립니다.</dd>
+      </dl>
+    </section>
+
+    <section id="review" class="content-section">
+        <h2>서대문구 인터넷 가입 '내돈내산' 후기 및 실제 사례 분석</h2>
+        <p>많은 고객님들이 **서대문구 인터넷** **업체**를 선택할 때 **네이버 블로그**나 **디시인사이드** 등 커뮤니티의 **내돈내산 후기**를 참고합니다. 저희는 투명한 **인터넷 가격 비교**를 통해 고객 만족도를 높이고 있습니다. 다음은 **서대문구** 주민들의 실제 **가입 후기**를 바탕으로 한 사례입니다.</p>
+        <p><strong>사례 1: 홍제동 노후 주택 거주자 (김OO님, 30대)</strong><br>
+        "이번에 **서대문구 홍제동**으로 이사를 오면서 **인터넷 설치**를 하려고 여러 **업체**에 문의했습니다. 기존에 살던 곳은 신축이라 **기가 인터넷**을 사용했는데, 이곳은 건물이 오래되어 **인터넷 설치**가 까다롭다고 하더군요. 다른 곳에서는 **설치 불가** 판정을 받았지만, **서대문구 인터넷 가입 비교 센터**에서 **KT** 상품 중 광케이블 포설이 가능한 경로를 찾아 **500Mbps**를 설치해 주었습니다. **인터넷 비용**도 **저렴한곳**이라 만족합니다."</p>
+
+        <p><strong>사례 2: 북가좌동 신규 아파트 거주자 (이OO님, 40대)</strong><br>
+        "이사 후 **서대문구 북가좌동** 아파트 단지에서 **인터넷 가입**을 하려고 했더니, **KT**가 독점 계약을 한 상태라 다른 **업체**로 변경이 어렵다는 이야기를 들었습니다. **SKT**를 사용하고 싶었지만 어쩔 수 없었죠. 하지만 **서대문구 인터넷 가입** 센터를 통해 **KT**로 **신규 가입** 시 받을 수 있는 **최대 현금지원** **사은품** **이벤트**를 안내받아 만족스러운 조건으로 계약했습니다. **상품권** **지원금**도 바로 받을 수 있어서 좋았습니다."</p>
+
+        <p><strong>사례 3: 신촌동 원룸 거주자 (박OO님, 20대)</strong><br>
+        "대학교 근처 **신촌동 원룸**으로 **이사** 왔는데, 기존에 사용하던 **LG U+** **인터넷** **약정**이 남아있었습니다. 위약금을 내야 하나 고민했는데, 상담사님이 **인터넷 비용**을 최소화할 수 있는 방법을 **추천**해 주셨습니다. **서대문구** 지역 특성상 **원룸** 단체 계약이 많다는 사실도 알려주셔서, 건물에서 제공하는 **인터넷**을 사용하고 **약정** 기간 동안 **할인** 받을 수 있는 팁을 얻었습니다. **내돈내산**으로 진행했는데 **저렴한곳**을 잘 찾은 것 같습니다."</p>
+    </section>
+
+    <section id="comparison_tips" class="content-section">
+        <h2>서대문구 인터넷 가입 시 현명한 선택을 위한 추가 팁</h2>
+        <h3>1. 모바일 결합 상품을 활용한 최대 할인</h3>
+        <p>**서대문구 인터넷 가입** 시 **가장 저렴한곳**을 찾는 방법 중 하나는 **모바일 결합 상품**을 이용하는 것입니다. **KT, SKT, LG U+** 통신 3사는 모두 모바일 회선과 **인터넷**을 결합하면 **매월 통신비**를 **할인**해 주는 프로모션을 제공합니다. **가족** 구성원의 모바일 통신사가 하나로 통일되어 있다면, **인터넷 비용**을 획기적으로 낮출 수 있습니다. 예를 들어, **SKT** 온가족 결합, **KT** 패밀리박스, **LG U+** 참 쉬운 가족결합 등 각 통신사별 **장점**이 있으므로 **전문 업체**의 **비교**를 통해 최적의 결합 **상품**을 선택하는 것이 중요합니다.</p>
+
+        <h3>2. 2026년 정부 지원 혜택 및 공공 와이파이 활용</h3>
+        <p>2026년 현재 정부는 가계 통신비 절감을 위해 다양한 정책을 시행하고 있습니다. 특히 저소득층 대상의 **인터넷 비용** **할인** 혜택이나 **상품권** **지원금**이 제공되기도 하므로, 해당 여부를 꼼꼼히 확인해야 합니다. 또한, **서대문구** 내 주요 공공장소(도서관, 공원, 주민센터 등)에는 **공공 와이파이**가 설치되어 있어, 외부 활동 시 데이터 사용량을 줄일 수 있습니다. **인터넷** **디시** 등 커뮤니티에서 이러한 정보를 공유하기도 하므로, 적극적으로 활용하는 것을 **추천**합니다.</p>
+
+        <h3>3. 믿을 수 있는 업체 선택 기준 (관허 업체 확인)</h3>
+        <p>**서대문구 인터넷 가입** 시 **업체** 선택이 중요합니다. 일부 무허가 **업체**는 **현금지원**을 미끼로 고객을 유치한 후 사라지는 경우가 있습니다. **한국통신사업자연합회(KTOA)** 등 정부 기관에 등록된 정식 **관허업체**인지 확인해야 합니다. **신규 가입** 시 **현금지원** 규모만 보고 판단하기보다는, **업체**의 신뢰성과 **내돈내산 후기**를 종합적으로 **비교**하여 **전문** **업체**를 선택해야 안전하게 **혜택**을 누릴 수 있습니다.</p>
+
+        <a href="https://namu.wiki/w/%EC%9D%B8%ED%84%B0%EB%84%B7%20%EC%82%AC%EC%9D%80%ED%92%88" target="_blank" rel="noopener noreferrer" class="external-link">인터넷 사은품 관련 정보 (나무위키)</a>
+        <a href="https://www.kcc.go.kr/user.do?pageId=100319" target="_blank" rel="noopener noreferrer" class="external-link">방송통신위원회 통신분쟁조정위원회 (분쟁 발생 시)</a>
+        <a href="https://www.msit.go.kr/index.do" target="_blank" rel="noopener noreferrer" class="external-link">과학기술정보통신부 홈페이지 (통신 정책 정보)</a>
+        <a href="https://www.kca.go.kr/home/main.do" target="_blank" rel="noopener noreferrer" class="external-link">한국소비자원 홈페이지 (피해구제 정보)</a>
+        <a href="https://www.moef.go.kr/index.do" target="_blank" rel="noopener noreferrer" class="external-link">기획재정부 홈페이지 (정부 지원금 정보)</a>
+    </section>
+
+    <section id="contact-form" class="content-section form-section">
+        <h2>서대문구 인터넷 무료 견적 및 상담 신청</h2>
+        <p>지금 바로 **서대문구 인터넷** **신규 가입**에 대한 **무료 견적**을 받아보세요. 고객님의 주거 환경과 통신 패턴을 고려한 맞춤형 **인터넷 가격** **비교**와 **최대 현금지원** **혜택**을 안내해 드립니다. 개인 정보는 안전하게 보호됩니다.</p>
+        <form action="#" method="post">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" placeholder="성함을 입력해주세요" required>
+
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="휴대폰 번호를 입력해주세요" required>
+
+            <label for="address">서대문구 상세 주소 (설치 주소)</label>
+            <input type="text" id="address" name="address" placeholder="예: 서대문구 홍제동 123-456" required>
+
+            <label for="service_type">희망 인터넷 상품</label>
+            <select id="service_type" name="service_type" required>
+                <option value="">상품을 선택해주세요</option>
+                <option value="100m">초고속 인터넷 (100Mbps)</option>
+                <option value="500m">기가 라이트 인터넷 (500Mbps)</option>
+                <option value="1g">기가 인터넷 (1Gbps)</option>
+                <option value="skt_bundle">SKT 모바일 결합</option>
+                <option value="kt_bundle">KT 모바일 결합</option>
+                <option value="lg_bundle">LG U+ 모바일 결합</option>
+            </select>
+
+            <label for="memo">문의 내용 (선택 사항)</label>
+            <textarea id="memo" name="memo" rows="4" placeholder="궁금한 점이나 특별 요청 사항을 적어주세요. 예: 손없는날 이사 예정, 사은품 최대 혜택 문의"></textarea>
+
+            <button type="submit">무료 견적 신청하기</button>
+        </form>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // FAQ 아코디언 기능 (접기/펼치기)
+        document.querySelectorAll('dl dt').forEach((dt) => {
+          dt.addEventListener('click', () => {
+            const expanded = dt.getAttribute('aria-expanded') === 'true' || false;
+            dt.setAttribute('aria-expanded', !expanded);
+            dt.classList.toggle('active');
+          });
+          dt.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              dt.click();
+            }
+          });
+        });
+
+        // 그래프 애니메이션 (optional)
+        const bars = document.querySelectorAll('.bar');
+        bars.forEach(bar => {
+            const height = parseInt(bar.style.height);
+            bar.style.height = '0';
+            setTimeout(() => {
+                bar.style.height = height + '%';
+            }, 500);
+        });
+    });
+  </script>
+  
